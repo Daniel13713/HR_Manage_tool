@@ -23,7 +23,7 @@ class Resume(BaseModel):
     ----------------------------------
     """
     
-    employee = models.OneToOneField(Employee, on_delete=models.CASCADE)
+    employee = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name="resume")
     personal_email = models.EmailField(max_length=254)
     description = models.TextField()
     photography = models.CharField(max_length=100, default="photo", blank=True)

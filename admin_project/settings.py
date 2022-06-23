@@ -34,16 +34,24 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+
+    #Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #My apps
     'sys_admin.apps.SysAdminConfig',
     'record.apps.RecordConfig',
     'legal.apps.LegalConfig',
     'management.apps.ManagementConfig',
+    'api.apps.ApiConfig',
+
+    #Api apps
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +88,7 @@ WSGI_APPLICATION = 'admin_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = pgconnection.configure({
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get("POSTGRES_NAME"),
@@ -89,7 +97,7 @@ DATABASES = pgconnection.configure({
         'HOST': 'db',
         'PORT': 5432,
     }
-})
+}
 
 
 # Password validation

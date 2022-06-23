@@ -22,7 +22,7 @@ class Experience(BaseModel):
     Create Table in Postgres Database
     ----------------------------------
     """
-    employee = models.OneToOneField(Employee, on_delete=models.CASCADE)
+    employee = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name="experience")
     job_title = models.CharField(max_length=100)
     job_description = models.TextField()
     contact_name = models.CharField(max_length=200, blank=True)

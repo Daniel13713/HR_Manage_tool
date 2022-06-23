@@ -25,6 +25,8 @@ class Department(BaseModel):
     
     name = models.CharField(max_length=100)
 
+    employee = models.ManyToManyField(Employee, through='Employee_Department', related_name="departments")
+
     def __str__(self) -> str:
         return self.name
 
