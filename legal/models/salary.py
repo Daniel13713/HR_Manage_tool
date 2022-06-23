@@ -27,6 +27,8 @@ class Salary(BaseModel):
     amount = models.FloatField()
     contract = models.CharField(max_length=100, default="pdf option or collila de pago?")
 
+    employee = models.ManyToManyField(Employee, through='Employee_Salary', related_name="salary")
+
     def __str__(self) -> str:
         return self.amount
 

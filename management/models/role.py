@@ -26,12 +26,12 @@ class Role(BaseModel):
     """
     
     name = models.CharField(max_length=100)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="roles")
     job_description = models.TextField()
     default_contract = models.CharField(max_length=100, default="Pdf option")
     default_salary = models.FloatField()
 
-    employee = models.ManyToManyField(Employee, through='Employee_Role')
+    employee = models.ManyToManyField(Employee, related_name="roles", through='Employee_Role')
 
     def __str__(self) -> str:
         return self.name

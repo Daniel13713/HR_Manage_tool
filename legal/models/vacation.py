@@ -22,6 +22,6 @@ class Vacation(BaseModel):
     Create Table in Postgres Database
     ----------------------------------
     """
-    employee = models.OneToOneField(Employee, on_delete=models.CASCADE)
+    employee = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name="vacation")
     start_date = models.DateTimeField(help_text="Start of vacations")
     end_date = models.DateTimeField(help_text="End of vacations")

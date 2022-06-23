@@ -26,6 +26,8 @@ class Team(BaseModel):
     
     name = models.CharField(max_length=100)
 
+    employee = models.ManyToManyField(Employee, through='Employee_Team', related_name="teams")
+
     def __str__(self) -> str:
         return self.name
 

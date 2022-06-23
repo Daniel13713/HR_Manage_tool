@@ -22,7 +22,7 @@ class SocialSecurity(BaseModel):
     Create Table in Postgres Database
     ----------------------------------
     """
-    employee = models.OneToOneField(Employee, on_delete=models.CASCADE)
+    employee = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name="social_security")
     pension = models.CharField(max_length=100, default="pdf option?")
     insurance = models.CharField(max_length=100,default="pdf option?")
     mandatory_healthcare_provider = models.CharField(max_length=100, default="eps?")
