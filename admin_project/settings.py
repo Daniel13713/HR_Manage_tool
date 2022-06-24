@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'legal.apps.LegalConfig',
     'management.apps.ManagementConfig',
     'api.apps.ApiConfig',
+    'frontend.apps.FrontendConfig',
 
     #Api apps
     'rest_framework',

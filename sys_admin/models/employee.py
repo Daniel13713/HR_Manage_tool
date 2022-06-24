@@ -10,53 +10,12 @@ from email.policy import default
 from secrets import choice
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractUser, BaseUserManager, UserManager, AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser
 from django.utils import timezone
 import uuid
 import pghistory
-from sys_admin.models.base_model import BaseModel
 import pgtrigger
-
-class EmployeeManager(BaseUserManager):
-    def create_user(self, email, username, password=None):
-        """
-        -------------------------------------
-        Creates and saves a User with the 
-        given email, identifier and password.
-        -------------------------------------
-        """
-        if not email:
-            raise ValueError('Users must have an email address')
-        if not username:
-            raise ValueError('Users must have an Username')
-
-        user = self.model(
-            email=self.normalize_email(email),
-            username=username,
-        )
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, email, username, password=None):
-        """
-        ------------------------------
-        Creates and saves a superuser
-        with the given email, identifier
-        and password.
-        ------------------------------
-        """
-        user = self.create_user(
-            email=self.normalize_email(email),
-            password=password,
-            username=username,
-        )
-        user.is_admin = True
-        user.is_staff = True
-        user.is_superuser = True
-        user.save(using=self._db)
-        return user
-
+from sys_admin.models.base_model import BaseModel
 
 class Employee(BaseModel, AbstractBaseUser):
     """
@@ -95,7 +54,6 @@ class Employee(BaseModel, AbstractBaseUser):
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ['email']
     
-    objects = EmployeeManager()
 
     def __str__(self) -> str:
         return self.email

@@ -5,20 +5,21 @@ from sys_admin.api.serializers import EmployeeSerializer
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import action
-
+from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
 # Lead Viewset
 
 
 class EmployeeViewSet(viewsets.ModelViewSet):
-    permission_classes = [
-        permissions.IsAuthenticated,
-    ]
+#class EmployeeViewSet(generics.ListAPIView):
+    # """permission_classes = [
+    #     permissions.IsAuthenticated,
+    # ]"""
     serializer_class = EmployeeSerializer
 
+    #employees = Employee.objects.all().filter(status=True)
     employees = Employee.objects.all()
-    #employees_roles = Employee_Role.objects.all()
-    #print(employees_roles)
-    #print([Employee.objects.get(id=employee_role.employee_id) for employee_role in employees_roles])
     queryset = employees
 
     @action(detail=True, methods=["GET"], url_path='roles')
@@ -26,5 +27,17 @@ class EmployeeViewSet(viewsets.ModelViewSet):
         employee = self.get_object()
         roles = employee.roles.all()
         return Response([role.name for role in roles])
+    
+    def list(self, request):
+        queryset = Employee.objects.all()
+        serializer = EmployeeSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    def destroy(self, request, pk=None):
+        print("Destroy?----")
+        queryset = Employee.objects.all()
+        serializer = EmployeeSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
 
     

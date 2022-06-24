@@ -9,6 +9,7 @@ from legal.api.views import *
 
 router = DefaultRouter()
 # Sys Admin
+#employee_list = EmployeeViewSet.as_view({'get': 'list'})
 router.register('employees', EmployeeViewSet, 'employees')
 
 # Record
@@ -29,4 +30,6 @@ router.register('social_security', SocialSecurityViewSet, 'social_security')
 
 urlpatterns = [
     path("", include(router.urls)),
+    #path("", include("sys_admin.api.urls")),
+    #path("employees/", EmployeeViewSet.as_view(), name="employees")
 ]
